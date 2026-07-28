@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Search Engine</title>
+
+    <style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        min-height:100vh;
+        background:linear-gradient(135deg,#4facfe,#00c6fb,#43e97b);
+        background-size:400% 400%;
+        animation:gradient 12s ease infinite;
+        padding:40px;
+    }
+
+    @keyframes gradient{
+        0%{
+            background-position:0% 50%;
+        }
+
+        50%{
+            background-position:100% 50%;
+        }
+
+        100%{
+            background-position:0% 50%;
+        }
+    }
+
+
+    .container{
+        width:90%;
+        max-width:1100px;
+        margin:auto;
+    }
+
+
+    h1{
+        text-align:center;
+        color:white;
+        font-size:42px;
+        margin-bottom:25px;
+        text-shadow:2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+
+    form{
+        display:flex;
+        justify-content:center;
+        margin-bottom:25px;
+    }
+
+
+    input[type=text]{
+        width:500px;
+        padding:15px;
+        font-size:17px;
+        border:none;
+        outline:none;
+        border-radius:10px 0 0 10px;
+    }
+
+
+    button{
+        padding:15px 30px;
+        border:none;
+        background:#ff9800;
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+        border-radius:0 10px 10px 0;
+        transition:0.3s;
+    }
+
+
+    button:hover{
+        background:#e68900;
+    }
+
+
+    .info{
+        text-align:center;
+        color:white;
+        font-size:18px;
+        margin-bottom:25px;
+    }
+
+
+    .result{
+        background:rgba(255,255,255,0.95);
+        padding:25px;
+        margin:20px auto;
+        border-radius:15px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        transition:0.3s;
+    }
+
+
+    .result:hover{
+        transform:translateY(-5px);
+    }
+
+
+    .result a{
+        color:#1565c0;
+        text-decoration:none;
+        font-size:24px;
+        font-weight:bold;
+    }
+
+
+    .result a:hover{
+        color:#0d47a1;
+    }
+
+
+    .url{
+        color:#2e7d32;
+        margin:10px 0;
+        word-break:break-word;
+    }
+
+
+    .snippet{
+        color:#444;
+        line-height:1.6;
+        margin:15px 0;
+    }
+
+
+    .score{
+        color:#ff6f00;
+        font-weight:bold;
+        font-size:17px;
+    }
+
+
+    .no-result{
+        text-align:center;
+        color:white;
+        font-size:22px;
+        margin-top:40px;
+    }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>🔍 Custom Search Engine</h1>
+
+
+<form method="GET">
+
+    <input 
+        type="text" 
+        name="q" 
+        placeholder="Search..." 
+        value="{{ query }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+
+
+{% if query %}
+
+<div class="info">
+
+    Search Results for:
+    <b>{{ query }}</b>
+
+    <br><br>
+
+    Results found: {{ results|length }}
+
+    {% if search_time %}
+        ({{ search_time }} seconds)
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+
+
+{% for document, score in results %}
+
+<div class="result">
+
+    <a href="{{ document.url }}" target="_blank">
+        {{ document.title }}
+    </a>
+
+
+    <p class="url">
+        {{ document.url }}
+    </p>
+
+
+    {% if document.snippet %}
+
+    <p class="snippet">
+        {{ document.snippet|truncatewords:45 }}
+    </p>
+
+    {% endif %}
+
+
+
+    <p class="score">
+
+        Relevance Score:
+        {{ score|floatformat:2 }}
+
+    </p>
+
+
+</div>
+
+
+{% empty %}
+
+
+{% if query %}
+
+<p class="no-result">
+    No results found.
+</p>
+
+{% endif %}
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index Website</title>
+</head>
+<body>
+
+<h1>Index a Website</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="url" placeholder="https://example.com" style="width:400px;padding:10px;">
+
+    <button type="submit">Index Website</button>
+</form>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+
+<br>
+<a href="/">Go to Search Page</a>
+
+</body>
+</html>
