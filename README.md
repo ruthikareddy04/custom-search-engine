@@ -90,6 +90,56 @@ This helps display more relevant results first.
 
 ---
 
-## 📂 Project Structure
+---
+
+# 👩‍💻 Developer
+
+## Ruthika Pyreddy
+
+**B.Tech Computer Science Engineering**
+
+Passionate about building web applications and exploring technologies like:
+
+- Python
+- Django
+- Machine Learning
+- Artificial Intelligence
+- Web Development
+
+---
+
+# 📌 Project Information
+
+**Project Name:** Custom Search Engine
+
+**Developed Using:**
+- Django Framework
+- Python
+- HTML & CSS
+- SQLite Database
+
+**Key Implementations:**
+
+✅ Website crawling and indexing  
+✅ TF-IDF based search ranking  
+✅ Search analytics dashboard  
+✅ Responsive user interface  
+✅ Railway cloud deployment  
+
+---
+
+# 🌐 Live Application
+
+🔗 https://custom-search-engine-production.up.railway.app/
+
+---
+
+<div align="center">
+
+⭐ **Custom Search Engine**  
+Developed by **Ruthika Pyreddy**  
+2026
+
+</div>
 
 
