@@ -2,25 +2,141 @@
 <html>
 <head>
     <title>Index Website</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#4facfe,#00c6fb,#43e97b);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .card{
+            width:600px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0 15px 35px rgba(0,0,0,.2);
+        }
+
+        h1{
+            margin-bottom:25px;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            padding:15px;
+            border:2px solid #ddd;
+            border-radius:10px;
+            font-size:16px;
+            margin-bottom:20px;
+        }
+
+        button{
+            width:100%;
+            padding:15px;
+            border:none;
+            background:#4CAF50;
+            color:white;
+            font-size:18px;
+            border-radius:10px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            background:#43a047;
+        }
+
+        .message{
+            margin-top:20px;
+            padding:15px;
+            background:#e8f5e9;
+            color:#2e7d32;
+            border-radius:10px;
+            font-weight:bold;
+        }
+
+        .buttons{
+            margin-top:25px;
+        }
+
+        .buttons a{
+            display:inline-block;
+            margin:8px;
+            padding:12px 20px;
+            text-decoration:none;
+            color:white;
+            border-radius:8px;
+        }
+
+        .home{
+            background:#2196f3;
+        }
+
+        .search{
+            background:#ff9800;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-<h1>Index a Website</h1>
+<div class="card">
+
+<h1>🌐 Index a Website</h1>
 
 <form method="POST">
-    {% csrf_token %}
 
-    <input type="text" name="url" placeholder="https://example.com" style="width:400px;padding:10px;">
+{% csrf_token %}
 
-    <button type="submit">Index Website</button>
+<input
+type="url"
+name="url"
+placeholder="https://example.com"
+required
+>
+
+<button type="submit">
+Index Website
+</button>
+
 </form>
 
 {% if message %}
-<p>{{ message }}</p>
+
+<div class="message">
+{{ message }}
+</div>
+
 {% endif %}
 
-<br>
-<a href="/">Go to Search Page</a>
+<div class="buttons">
+
+<a href="/" class="home">
+🏠 Home
+</a>
+
+<a href="/search/" class="search">
+🔍 Search
+</a>
+
+</div>
+
+</div>
 
 </body>
 </html>

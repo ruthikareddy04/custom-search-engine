@@ -104,20 +104,23 @@
 
 
     .result:hover{
-        transform:translateY(-5px);
+        transform:translateY(-8px) scale(1.01);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
     }
 
 
     .result a{
-        color:#1565c0;
-        text-decoration:none;
-        font-size:24px;
-        font-weight:bold;
-    }
+    color:#1565c0;
+    text-decoration:none;
+    font-size:24px;
+    font-weight:bold;
+    transition:.3s;
+}
 
 
     .result a:hover{
         color:#0d47a1;
+        text-decoration:underline;
     }
 
 
@@ -148,8 +151,53 @@
         font-size:22px;
         margin-top:40px;
     }
+    .nav-btn{
+    display:inline-block;
+    padding:12px 22px;
+    margin:5px;
+    background:white;
+    color:#1565c0;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+    transition:.3s;
+}
 
+.nav-btn:hover{
+    background:#1565c0;
+    color:white;
+}
 
+footer{
+    text-align:center;
+    color:white;
+    margin-top:40px;
+    font-size:15px;
+    opacity:.9;
+}
+
+.no-result{
+    background:rgba(255,255,255,.9);
+    color:#333;
+    width:60%;
+    margin:30px auto;
+    padding:25px;
+    border-radius:12px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.score-badge{
+    display:inline-block;
+    margin-top:15px;
+    padding:8px 15px;
+    background:linear-gradient(135deg,#ff9800,#ff5722);
+    color:white;
+    border-radius:30px;
+    font-weight:bold;
+    font-size:15px;
+    box-shadow:0 5px 12px rgba(0,0,0,0.2);
+}
     </style>
 
 </head>
@@ -169,7 +217,7 @@
     <input 
         type="text" 
         name="q" 
-        placeholder="Search..." 
+        placeholder="🔍 Search websites..." 
         value="{{ query }}"
     >
 
@@ -178,6 +226,15 @@
     </button>
 
 </form>
+<div style="text-align:center;margin-bottom:25px;">
+
+    <a href="/" class="nav-btn">🏠 Home</a>
+
+    <a href="/index/" class="nav-btn">📥 Index Website</a>
+
+    <a href="/analytics/" class="nav-btn">📊 Analytics</a>
+
+</div>
 
 
 
@@ -190,11 +247,13 @@
 
     <br><br>
 
-    Results found: {{ results|length }}
+    <strong>{{ results|length }}</strong> result(s) found
 
-    {% if search_time %}
-        ({{ search_time }} seconds)
-    {% endif %}
+{% if search_time %}
+<br><br>
+<strong>{{ results|length }}</strong> result(s) found in
+<strong>{{ search_time }}</strong> seconds.
+{% endif %}
 
 </div>
 
@@ -226,35 +285,39 @@
 
 
 
-    <p class="score">
+    <div class="score-badge">
 
-        Relevance Score:
-        {{ score|floatformat:2 }}
+    ⭐ Relevance Score: {{ score|floatformat:2 }}
 
-    </p>
+</div>
 
 
 </div>
+
+
 
 
 {% empty %}
 
-
 {% if query %}
 
-<p class="no-result">
-    No results found.
-</p>
+<div class="no-result">
+    🔍 No Results Found
+    <br><br>
+    Try searching with another keyword.
+</div>
 
 {% endif %}
-
 
 {% endfor %}
 
 
-
 </div>
+<footer>
 
+Developed by <b>Ruthika Pyreddy</b> | Custom Search Engine | 2026
+
+</footer>
 
 </body>
 
