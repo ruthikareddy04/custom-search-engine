@@ -1,78 +1,95 @@
 # 🔍 Custom Search Engine
 
-A Django-based Custom Search Engine that crawls websites, indexes web pages, and provides keyword-based search using the TF-IDF algorithm.
+A web-based **Custom Search Engine** built using Django that allows users to index websites, search indexed content, and get ranked results using a TF-IDF based ranking algorithm.
 
-## Features
+## 🌐 Live Demo
 
-- Website crawling
-- Search indexing
-- TF-IDF relevance ranking
-- Search history
-- Analytics dashboard
-- Responsive interface
+https://custom-search-engine-production.up.railway.app/
 
-## Technologies Used
+---
 
+## 📌 Project Overview
+
+The Custom Search Engine is designed to crawl and index websites, store searchable data, and provide relevant search results based on keyword matching and ranking algorithms.
+
+The project demonstrates concepts like:
+- Web crawling
+- Text processing
+- Information retrieval
+- TF-IDF ranking
+- Search analytics
+- Django web development
+
+---
+
+## 🚀 Features
+
+### 🔎 Search Engine
+- Search indexed websites using keywords
+- TF-IDF based relevance ranking
+- Title-based ranking boost
+- URL-based ranking boost
+- Displays relevance score
+- Shows search execution time
+- Displays result snippets
+
+### 🌐 Website Indexing
+- Add website URLs for indexing
+- Crawl multiple pages from websites
+- Extract and store webpage content
+- Create searchable document database
+
+### 📊 Analytics Dashboard
+- Total indexed documents
+- Total indexed terms
+- Total searches
+- Top searched keywords
+- Recent search history
+
+### 🎨 User Interface
+- Modern responsive design
+- Animated gradient background
+- Search result cards
+- Navigation between pages
+- Clean user-friendly layout
+
+---
+
+## 🛠️ Technologies Used
+
+### Backend
 - Python
 - Django
-- SQLite
-- HTML
-- CSS
-- BeautifulSoup
-- Requests
+- SQLite Database
 
-## Installation
+### Frontend
+- HTML5
+- CSS3
+- Django Templates
 
-1. Clone the repository
+### Deployment
+- Railway
 
-```bash
-git clone https://github.com/ruthikareddy04/custom-search-engine.git
-```
+### Version Control
+- Git & GitHub
 
-2. Create a virtual environment
+---
 
-```bash
-python -m venv env
-```
+## 🧠 Search Ranking Algorithm
 
-3. Activate the environment
+The project uses **TF-IDF (Term Frequency - Inverse Document Frequency)** for ranking search results.
 
-```bash
-env\Scripts\activate
-```
+Ranking improvements include:
 
-4. Install dependencies
+- Term frequency calculation
+- Document frequency calculation
+- Title keyword boosting
+- URL keyword boosting
 
-```bash
-pip install -r requirements.txt
-```
+This helps display more relevant results first.
 
-5. Run migrations
+---
 
-```bash
-python manage.py migrate
-```
+## 📂 Project Structure
 
-6. Start the server
 
-```bash
-python manage.py runserver
-```
-
-7. Open in your browser
-
-```
-http://127.0.0.1:8000/
-```
-
-## Future Improvements
-
-- PageRank algorithm
-- Image search
-- PDF indexing
-- Auto-complete suggestions
-- Advanced filters
-
-## Author
-
-**Ruthika Pyreddy**
