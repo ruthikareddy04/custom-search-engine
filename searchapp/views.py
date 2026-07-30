@@ -16,10 +16,15 @@ def search(request):
     search_time = 0
 
     if query:
-        response = requests.post(
-            "http://127.0.0.1:8001/search",
-            json={"query": query}
-        )
+        FASTAPI_URL = "https://YOUR-FASTAPI-URL.up.railway.app/search"
+
+response = requests.post(
+    FASTAPI_URL,
+    json={"query": query},
+    timeout=30
+)
+        
+        
 
         data = response.json()
 
