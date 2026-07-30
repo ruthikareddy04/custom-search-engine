@@ -3,85 +3,41 @@ from .models import Term
 from django.shortcuts import render
 from .models import Document, DocumentTermFrequency, SearchHistory
 from .crawler import index_multiple_pages
+from django.http import JsonResponse
 import math
 import time
+import requests
 
 
 def search(request):
-    start_time = time.time()
+    query = request.GET.get("q", "").strip()
 
-    query = request.GET.get("q", "").strip().lower()
+    results = []
+    search_time = 0
 
-    results = {}
-
-    total_documents = Document.objects.count()
-
-    if query and total_documents > 0:
-
-        words = query.split()
-
-        for word in words:
-
-            records = DocumentTermFrequency.objects.filter(
-                term__word__icontains=word
-            )
-
-            document_frequency = records.values(
-                "document"
-            ).distinct().count()
-
-            if document_frequency == 0:
-                continue
-
-            idf = math.log(total_documents / document_frequency)
-
-            for record in records:
-
-                document = record.document
-                tf = record.frequency
-                score = tf * idf
-
-                if document not in results:
-                    results[document] = 0
-
-                results[document] += score
-
-                # Title boost
-                if word in document.title.lower():
-                    results[document] += 20
-
-                # URL boost
-                if word in document.url.lower():
-                    results[document] += 10
-
-        # Round scores to 2 decimal places
-        sorted_results = [
-            (doc, round(score, 2))
-            for doc, score in sorted(
-                results.items(),
-                key=lambda x: x[1],
-                reverse=True
-            )
-        ]
-
-        SearchHistory.objects.create(
-            query=query,
-            results_count=len(sorted_results)
+    if query:
+        response = requests.post(
+            "http://127.0.0.1:8001/search",
+            json={"query": query}
         )
 
-    else:
-        sorted_results = []
+        data = response.json()
 
-    search_time = round(time.time() - start_time, 4)
+        results = []
+
+        for item in data["results"]:
+            results.append((
+                item,
+                item["score"]
+            ))
 
     return render(
         request,
         "search.html",
         {
-            "results": sorted_results,
             "query": query,
+            "results": results,
             "search_time": search_time,
-            "recent_searches": SearchHistory.objects.order_by("-searched_at")[:5],
         },
     )
 def index_page(request):
@@ -137,3 +93,21 @@ def analytics(request):
     )
 def home(request):
     return render(request, "home.html")
+def suggestions(request):
+
+    q = request.GET.get("q", "").lower()
+
+    suggestions = []
+
+    if q:
+
+        terms = (
+            Term.objects
+            .filter(word__startswith=q)
+            .values_list("word", flat=True)
+            .distinct()[:10]
+        )
+
+        suggestions = list(terms)
+
+    return JsonResponse(suggestions, safe=False)

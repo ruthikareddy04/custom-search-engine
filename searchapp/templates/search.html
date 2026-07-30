@@ -198,6 +198,29 @@ footer{
     font-size:15px;
     box-shadow:0 5px 12px rgba(0,0,0,0.2);
 }
+#suggestions{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    background:white;
+    border-radius:0 0 10px 10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    z-index:999;
+    max-height:250px;
+    overflow-y:auto;
+}
+
+.suggestion-item{
+    padding:12px 15px;
+    cursor:pointer;
+    border-bottom:1px solid #eee;
+    transition:.2s;
+}
+
+.suggestion-item:hover{
+    background:#f2f2f2;
+}
     </style>
 
 </head>
@@ -214,12 +237,20 @@ footer{
 
 <form method="GET">
 
-    <input 
-        type="text" 
-        name="q" 
-        placeholder="🔍 Search websites..." 
-        value="{{ query }}"
-    >
+    <div style="position:relative;width:500px;">
+
+<input
+    type="text"
+    id="searchBox"
+    name="q"
+    placeholder="🔍 Search websites..."
+    autocomplete="off"
+    value="{{ query }}"
+>
+
+<div id="suggestions"></div>
+
+</div>
 
     <button type="submit">
         Search
@@ -318,6 +349,61 @@ footer{
 Developed by <b>Ruthika Pyreddy</b> | Custom Search Engine | 2026
 
 </footer>
+<script>
+
+const searchBox = document.getElementById("searchBox");
+const suggestions = document.getElementById("suggestions");
+
+searchBox.addEventListener("keyup", function(){
+
+    const query = this.value;
+
+    if(query.length < 2){
+        suggestions.innerHTML = "";
+        return;
+    }
+
+    fetch("/suggestions/?q=" + query)
+        .then(response => response.json())
+        .then(data => {
+
+            suggestions.innerHTML = "";
+
+            data.forEach(item => {
+
+                const div = document.createElement("div");
+
+                div.className = "suggestion-item";
+
+                div.innerText = item;
+
+                div.onclick = function(){
+
+                    searchBox.value = item;
+
+                    suggestions.innerHTML = "";
+
+                };
+
+                suggestions.appendChild(div);
+
+            });
+
+        });
+
+});
+
+document.addEventListener("click", function(e){
+
+    if(e.target != searchBox){
+
+        suggestions.innerHTML = "";
+
+    }
+
+});
+
+</script>
 
 </body>
 

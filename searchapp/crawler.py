@@ -134,7 +134,6 @@ def get_internal_links(url):
 
     links = set()
 
-
     try:
 
         response = requests.get(
@@ -143,57 +142,48 @@ def get_internal_links(url):
             timeout=10
         )
 
-
         soup = BeautifulSoup(
             response.text,
             "html.parser"
         )
 
-
         domain = urlparse(url).netloc
 
+        for a in soup.find_all("a", href=True):
 
-
-        for a in soup.find_all(
-            "a",
-            href=True
-        ):
-
-
-            link = urljoin(
-                url,
-                a["href"]
-            )
-
+            link = urljoin(url, a["href"])
 
             parsed = urlparse(link)
 
-
-
-            if parsed.scheme not in [
-                "http",
-                "https"
-            ]:
+            if parsed.scheme not in ["http", "https"]:
                 continue
 
+            if parsed.netloc != domain:
+                continue
 
+            clean_url = link.split("#")[0].split("?")[0]
 
-            if parsed.netloc == domain:
+            if clean_url.endswith((
+                ".jpg",
+                ".jpeg",
+                ".png",
+                ".gif",
+                ".svg",
+                ".pdf",
+                ".zip",
+                ".css",
+                ".js",
+                ".xml"
+            )):
+                continue
 
-                clean_url = link.split("#")[0]
-
-                links.add(clean_url)
-
-
+            links.add(clean_url)
 
     except Exception as e:
 
         print(e)
 
-
-
     return list(links)
-
 
 
 
