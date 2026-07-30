@@ -275,6 +275,9 @@ footer{
 
     Search Results for:
     <b>{{ query }}</b>
+    <h3 style="color:#1565c0;">
+    🔥 Ranked using TF-IDF Algorithm
+    </h3>
 
     <br><br>
 
@@ -296,7 +299,7 @@ footer{
 
 <div class="result">
 
-    <a href="{{ document.url }}" target="_blank">
+    <a href="{{ result.url }}" target="_blank">
         {{ result.title }}
     </a>
 

@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import Document, DocumentTermFrequency, SearchHistory, Term
 from .crawler import index_multiple_pages
 from django.http import JsonResponse
+from math import log
 import time
 
 
@@ -18,13 +19,28 @@ def search(request):
         words = query.split()
         scores = {}
 
+        total_documents = Document.objects.count()
+
         for word in words:
+
             records = DocumentTermFrequency.objects.filter(
                 term__word__icontains=word
             )
 
+            document_frequency = records.values("document").distinct().count()
+
+            if document_frequency == 0:
+                continue
+
+            idf = log(total_documents / (1 + document_frequency))
+
             for record in records:
+
                 doc = record.document
+
+                tf = record.frequency
+
+                tfidf = (1 + log(tf)) * idf
 
                 if doc.id not in scores:
                     scores[doc.id] = {
@@ -34,13 +50,16 @@ def search(request):
                         "score": 0,
                     }
 
-                scores[doc.id]["score"] += record.frequency
+                scores[doc.id]["score"] += tfidf
 
                 if word in doc.title.lower():
-                    scores[doc.id]["score"] += 15
+                    scores[doc.id]["score"] += 50
+
+                if word in doc.url.lower():
+                    scores[doc.id]["score"] += 20
 
                 if word in doc.snippet.lower():
-                    scores[doc.id]["score"] += 8
+                    scores[doc.id]["score"] += 10
 
         results = sorted(
             scores.values(),
