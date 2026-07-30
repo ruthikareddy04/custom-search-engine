@@ -257,7 +257,7 @@ def index_website(url):
 
 
 
-def index_multiple_pages(start_url, max_pages=10):
+def index_multiple_pages(start_url, max_pages=50):
 
 
     visited = set()

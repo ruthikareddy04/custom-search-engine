@@ -19,7 +19,9 @@ def search(request):
         scores = {}
 
         for word in words:
-            records = DocumentTermFrequency.objects.filter(term__word=word)
+            records = DocumentTermFrequency.objects.filter(
+                term__word__icontains=word
+            )
 
             for record in records:
                 doc = record.document
