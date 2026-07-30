@@ -1,71 +1,42 @@
 # 🔍 Custom Search Engine
 
-A web-based **Custom Search Engine** built using Django that allows users to index websites, search indexed content, and get ranked results using a TF-IDF based ranking algorithm.
-
-## 🌐 Live Demo
-
-https://custom-search-engine-production.up.railway.app/
-
----
-
-## 📌 Project Overview
-
-The Custom Search Engine is designed to crawl and index websites, store searchable data, and provide relevant search results based on keyword matching and ranking algorithms.
-
-The project demonstrates concepts like:
-- Web crawling
-- Text processing
-- Information retrieval
-- TF-IDF ranking
-- Search analytics
-- Django web development
+A full-stack **Custom Search Engine** built using **Django** and **FastAPI**. The project crawls websites, indexes their content, and provides relevant search results through a modern web interface.
 
 ---
 
 ## 🚀 Features
 
-### 🔎 Search Engine
-- Search indexed websites using keywords
-- TF-IDF based relevance ranking
-- Title-based ranking boost
-- URL-based ranking boost
-- Displays relevance score
-- Shows search execution time
-- Displays result snippets
-
-### 🌐 Website Indexing
-- Add website URLs for indexing
-- Crawl multiple pages from websites
-- Extract and store webpage content
-- Create searchable document database
-
-### 📊 Analytics Dashboard
-- Total indexed documents
-- Total indexed terms
-- Total searches
-- Top searched keywords
-- Recent search history
-
-### 🎨 User Interface
-- Modern responsive design
-- Animated gradient background
-- Search result cards
-- Navigation between pages
-- Clean user-friendly layout
+- 🔎 Search indexed websites
+- 🌐 Website crawling and indexing
+- ⚡ FastAPI-powered Search API
+- 🎯 Relevance-based search results
+- 📊 Analytics Dashboard
+- 📱 Responsive UI
+- ☁️ Railway Deployment
+- 🗄️ SQLite Database
 
 ---
 
 ## 🛠️ Technologies Used
 
-### Backend
-- Python
-- Django
-- SQLite Database
-
 ### Frontend
 - HTML5
 - CSS3
 - Django Templates
+
+### Backend
+- Django
+- FastAPI
+- Python
+
+### Database
+- SQLite
+
+### Libraries
+- BeautifulSoup4
+- Requests
+- Uvicorn
+- Pydantic
 
 ### Deployment
 - Railway
@@ -75,71 +46,139 @@ The project demonstrates concepts like:
 
 ---
 
-## 🧠 Search Ranking Algorithm
+## 📂 Project Structure
 
-The project uses **TF-IDF (Term Frequency - Inverse Document Frequency)** for ranking search results.
-
-Ranking improvements include:
-
-- Term frequency calculation
-- Document frequency calculation
-- Title keyword boosting
-- URL keyword boosting
-
-This helps display more relevant results first.
-
----
-
----
-
-# 👩‍💻 Developer
-
-## Ruthika Pyreddy
-
-**B.Tech Computer Science Engineering**
-
-Passionate about building web applications and exploring technologies like:
-
-- Python
-- Django
-- Machine Learning
-- Artificial Intelligence
-- Web Development
+```
+Custom Search Engine/
+│
+├── custom_search_engine/
+├── searchapp/
+├── fastapi_backend/
+│   ├── main.py
+│   ├── database.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── search.py
+│   └── __init__.py
+│
+├── staticfiles/
+├── db.sqlite3
+├── manage.py
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
 
 ---
 
-# 📌 Project Information
+## ⚙️ Installation
 
-**Project Name:** Custom Search Engine
+### Clone Repository
 
-**Developed Using:**
-- Django Framework
-- Python
-- HTML & CSS
-- SQLite Database
+```bash
+git clone https://github.com/ruthikareddy04/custom-search-engine.git
+cd custom-search-engine
+```
 
-**Key Implementations:**
+### Create Virtual Environment
 
-✅ Website crawling and indexing  
-✅ TF-IDF based search ranking  
-✅ Search analytics dashboard  
-✅ Responsive user interface  
-✅ Railway cloud deployment  
+```bash
+python -m venv env
+```
+
+### Activate Virtual Environment
+
+Windows
+
+```bash
+env\Scripts\activate
+```
+
+Linux / macOS
+
+```bash
+source env/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
-# 🌐 Live Application
+## ▶️ Run Django
 
-🔗 https://custom-search-engine-production.up.railway.app/
+```bash
+python manage.py runserver
+```
+
+Runs at
+
+```
+http://127.0.0.1:8000
+```
 
 ---
 
-<div align="center">
+## ⚡ Run FastAPI
 
-⭐ **Custom Search Engine**  
-Developed by **Ruthika Pyreddy**  
-2026
+```bash
+cd fastapi_backend
+uvicorn main:app --reload --port 8001
+```
 
-</div>
+Runs at
 
+```
+http://127.0.0.1:8001
+```
 
+API Documentation
+
+```
+http://127.0.0.1:8001/docs
+```
+
+---
+
+## 🔍 Search Workflow
+
+1. Crawl websites
+2. Extract webpage content
+3. Store indexed data
+4. Process user query
+5. FastAPI retrieves matching documents
+6. Django displays ranked search results
+
+---
+
+## 🌐 Deployment
+
+**Frontend:** Railway (Django)
+
+**Backend API:** FastAPI
+
+---
+
+## 📸 Project Screens
+
+- Home Page
+- Search Results
+- Website Indexing
+- Analytics Dashboard
+- FastAPI API Docs
+
+---
+
+## 👩‍💻 Developer
+
+**Ruthika Pyreddy**
+
+GitHub:
+https://github.com/ruthikareddy04
+
+---
+
+⭐ Developed by **Ruthika Pyreddy**
