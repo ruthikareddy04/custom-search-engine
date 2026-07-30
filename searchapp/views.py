@@ -17,7 +17,7 @@ def search(request):
 
     if query:
         response = requests.post(
-            "http://127.0.0.1:8001/search",
+            custom-search-engine-production-12ab.up.railway.app
             json={"query": query}
         )
 
