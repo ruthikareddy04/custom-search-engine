@@ -1,184 +1,59 @@
 # 🔍 Custom Search Engine
 
-A full-stack **Custom Search Engine** built using **Django** and **FastAPI**. The project crawls websites, indexes their content, and provides relevant search results through a modern web interface.
+A web-based search engine built using Django and FastAPI with web crawling, indexing, and TF-IDF ranking.
 
----
+## 🚀 Live Demo
 
-## 🚀 Features
+https://custom-search-engine-production.up.railway.app
 
-- 🔎 Search indexed websites
-- 🌐 Website crawling and indexing
-- ⚡ FastAPI-powered Search API
-- 🎯 Relevance-based search results
-- 📊 Analytics Dashboard
-- 📱 Responsive UI
-- ☁️ Railway Deployment
-- 🗄️ SQLite Database
+## ✨ Features
 
----
+- 🔎 Website search functionality
+- 🕷️ Web crawler for indexing pages
+- 📚 Term frequency indexing
+- 📊 TF-IDF ranking algorithm
+- ⚡ FastAPI search API
+- 🔍 Search suggestions
+- 📈 Search analytics dashboard
+- 🌐 Railway deployment
 
 ## 🛠️ Technologies Used
 
-### Frontend
-- HTML5
-- CSS3
-- Django Templates
-
-### Backend
+- Python
 - Django
 - FastAPI
-- Python
-
-### Database
 - SQLite
-
-### Libraries
 - BeautifulSoup4
-- Requests
-- Uvicorn
-- Pydantic
-
-### Deployment
+- HTML/CSS/JavaScript
 - Railway
 
-### Version Control
-- Git & GitHub
+## 🏗️ Architecture
 
----
+User  
+↓  
+Django Frontend  
+↓  
+FastAPI Search API  
+↓  
+TF-IDF Ranking Engine  
+↓  
+Database Index
 
 ## 📂 Project Structure
-
-```
-Custom Search Engine/
+custom-search-engine/
+│
+├── searchapp/
+│ ├── models.py
+│ ├── views.py
+│ ├── crawler.py
+│ └── templates/
 │
 ├── custom_search_engine/
-├── searchapp/
-├── fastapi_backend/
-│   ├── main.py
-│   ├── database.py
-│   ├── models.py
-│   ├── schemas.py
-│   ├── search.py
-│   └── __init__.py
+│ ├── settings.py
+│ └── urls.py
 │
-├── staticfiles/
-├── db.sqlite3
-├── manage.py
+├── main.py
 ├── requirements.txt
-├── README.md
-└── .gitignore
-```
+├── manage.py
+└── README.md
 
----
-
-## ⚙️ Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/ruthikareddy04/custom-search-engine.git
-cd custom-search-engine
-```
-
-### Create Virtual Environment
-
-```bash
-python -m venv env
-```
-
-### Activate Virtual Environment
-
-Windows
-
-```bash
-env\Scripts\activate
-```
-
-Linux / macOS
-
-```bash
-source env/bin/activate
-```
-
-### Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## ▶️ Run Django
-
-```bash
-python manage.py runserver
-```
-
-Runs at
-
-```
-http://127.0.0.1:8000
-```
-
----
-
-## ⚡ Run FastAPI
-
-```bash
-cd fastapi_backend
-uvicorn main:app --reload --port 8001
-```
-
-Runs at
-
-```
-http://127.0.0.1:8001
-```
-
-API Documentation
-
-```
-http://127.0.0.1:8001/docs
-```
-
----
-
-## 🔍 Search Workflow
-
-1. Crawl websites
-2. Extract webpage content
-3. Store indexed data
-4. Process user query
-5. FastAPI retrieves matching documents
-6. Django displays ranked search results
-
----
-
-## 🌐 Deployment
-
-**Frontend:** Railway (Django)
-
-**Backend API:** FastAPI
-
----
-
-## 📸 Project Screens
-
-- Home Page
-- Search Results
-- Website Indexing
-- Analytics Dashboard
-- FastAPI API Docs
-
----
-
-## 👩‍💻 Developer
-
-**Ruthika Pyreddy**
-
-GitHub:
-https://github.com/ruthikareddy04
-
----
-
-⭐ Developed by **Ruthika Pyreddy**
