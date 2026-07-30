@@ -17,9 +17,10 @@ def search(request):
 
     if query:
         response = requests.post(
-           "https://custom-search-engine-production-12ab.up.railway.app/search",
-            json={"query": query}
-        )
+    "https://custom-search-engine-production.up.railway.app/search",
+    json={"query": query},
+    timeout=30
+)
 
         data = response.json()
 
