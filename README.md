@@ -56,4 +56,9 @@ custom-search-engine/
 ├── requirements.txt
 ├── manage.py
 └── README.md
+screenshots
+ ├── home.png
+ ├── search.png
+ └── analytics.png
+ 
 
