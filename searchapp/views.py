@@ -17,7 +17,7 @@ def search(request):
 
     if query:
         response = requests.post(
-            custom-search-engine-production-12ab.up.railway.app
+           "https://custom-search-engine-production-12ab.up.railway.app/search",
             json={"query": query}
         )
 
