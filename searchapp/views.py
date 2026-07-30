@@ -17,10 +17,10 @@ def search(request):
 
     if query:
         response = requests.post(
-    "https://custom-search-engine-production.up.railway.app/search",
-    json={"query": query},
-    timeout=30
-)
+            "https://perfect-joy-production-e20c.up.railway.app/search",
+            json={"query": query},
+            timeout=30
+        )
 
         data = response.json()
 
