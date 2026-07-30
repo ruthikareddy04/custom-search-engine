@@ -292,24 +292,24 @@ footer{
 
 
 
-{% for document, score in results %}
+{% for result in results %}
 
 <div class="result">
 
     <a href="{{ document.url }}" target="_blank">
-        {{ document.title }}
+        {{ result.title }}
     </a>
 
 
     <p class="url">
-        {{ document.url }}
+        {{ result.url }}
     </p>
 
 
-    {% if document.snippet %}
+    {% if result.snippet %}
 
     <p class="snippet">
-        {{ document.snippet|truncatewords:45 }}
+        {{ result.snippet|truncatewords:45 }}
     </p>
 
     {% endif %}
@@ -318,7 +318,7 @@ footer{
 
     <div class="score-badge">
 
-    ⭐ Relevance Score: {{ score|floatformat:2 }}
+    ⭐ Relevance Score: {{ result.score|floatformat:2 }}
 
 </div>
 

@@ -1,36 +1,57 @@
 from django.db.models import Count
-from .models import Term
 from django.shortcuts import render
-from .models import Document, DocumentTermFrequency, SearchHistory
+from .models import Document, DocumentTermFrequency, SearchHistory, Term
 from .crawler import index_multiple_pages
 from django.http import JsonResponse
-import math
 import time
-import requests
 
 
 def search(request):
-    query = request.GET.get("q", "").strip()
+    query = request.GET.get("q", "").strip().lower()
 
     results = []
     search_time = 0
 
     if query:
-        response = requests.post(
-            "https://perfect-joy-production-e20c.up.railway.app/search",
-            json={"query": query},
-            timeout=30
+        start = time.time()
+
+        words = query.split()
+        scores = {}
+
+        for word in words:
+            records = DocumentTermFrequency.objects.filter(term__word=word)
+
+            for record in records:
+                doc = record.document
+
+                if doc.id not in scores:
+                    scores[doc.id] = {
+                        "title": doc.title,
+                        "url": doc.url,
+                        "snippet": doc.snippet,
+                        "score": 0,
+                    }
+
+                scores[doc.id]["score"] += record.frequency
+
+                if word in doc.title.lower():
+                    scores[doc.id]["score"] += 15
+
+                if word in doc.snippet.lower():
+                    scores[doc.id]["score"] += 8
+
+        results = sorted(
+            scores.values(),
+            key=lambda x: x["score"],
+            reverse=True,
         )
 
-        data = response.json()
+        SearchHistory.objects.create(
+            query=query,
+            results_count=len(results)
+        )
 
-        for item in data["results"]:
-            results.append(
-                (
-                    item,
-                    item["score"]
-                )
-            )
+        search_time = round(time.time() - start, 3)
 
     return render(
         request,
